@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 50%;
+        margin: auto;
+        padding: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Word Counter App</h2>
+    <div class="editor">
+      <textarea rows="10" cols="40" id="editor"></textarea>
+    </div>
+    <div class="result">
+      <p>word : <span id="word_count"></span></p>
+      <p>Letter : <span id="letter_count"></span></p>
+    </div>
+
+    <script>
+      let all_words = "";
+      document.getElementById("editor").addEventListener("keyup", function (e) {
+        all_words = e.target.value;
+        let words = all_words.split(" ");
+        words = words.filter((word) => word.length > 0);
+        let wordCount = words.length > 0 ? words.length : 0;
+        document.getElementById("word_count").innerText = wordCount;
+        const allLetters = all_words.trim().replace(/\s/g, "").length;
+        
+        // let letterCount = all_words.trim().length
+        document.getElementById("letter_count").innerText = allLetters
+      });
+    </script>
+  </body>
+</html>
