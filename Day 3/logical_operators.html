@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var isPass = true;
+        var isFail = false;
+
+        var result = (isPass && isFail);
+        console.log(`${isPass} && ${isFail} = ${result}`);
+         result  = (isPass || isFail)
+        console.log(`${isPass} ra ${isFail} ko OR Operation = ${result}`);
+        result = !isPass
+        console.log(`${isPass} ko NOT operation = ${result}`);
+        // bitwise operations
+         var bit1 = 3 // 011
+         var bit2 = 2 // 010
+
+         console.log(bit1 & bit2); // and
+         console.log(bit1 | bit2); // OR
+    </script>
+</body>
+</html>

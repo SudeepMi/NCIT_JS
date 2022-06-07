@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array as Object</title>
+</head>
+<body>
+    <script>
+        const arr = [
+            "sudeep",
+            "laxman",
+            "sarbendra",
+            "razz",
+            "rezzu",
+            "kajol",
+        ];
+        const len = arr.length;
+        document.write(len);
+        document.write(arr.sort());
+
+        document.write(arr[0]);
+        document.write(arr[len-1]);
+
+        document.write(arr.pop())
+
+        arr.push("Bibek"); //add new el in array at end
+        document.write("<br/>"+arr)
+
+        arr.shift() //removes first el
+        document.write("<br/>"+arr)
+
+        arr.unshift("bikram") //add new el at begining
+        document.write("<br/>"+arr)
+
+    </script>
+</body>
+</html>

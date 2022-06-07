@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control Flow</title>
+  </head>
+  <body>
+    <script>
+      // var number = prompt("Enter the number");
+      // if(number>5){
+      //     document.write("Given number is greater than 5");
+      // }else{
+      //     document.write("Given number is not greater than 5");
+      // }
+
+      // var number = prompt("Enter the number");
+      // if(number>=0 && number < 10){
+      //     document.write("Number is of 1 digit");
+      // }
+      // else if(number>10 && number<100){
+      //     document.write("Number is of 2 digit");
+
+      // }
+      // else if(number>100 && number<1000){
+      //     document.write("Number is of 3 digit");
+
+      // }
+      // else if(number>1000 && number<10000){
+      //     document.write("Number is of 4 digit");
+      // }else{
+      //     document.write("Number is of more than 4 digit");
+      // }
+      var total_marks = prompt("Enter marks obtained");
+      var full_marks = 500;
+      var percentage = (total_marks / full_marks) * 100;
+   
+      switch (percentage) {
+        case 25:
+          document.write("Grade: D");
+          break;
+        case 50:
+          document.write("Grade: C");
+          break;
+        case 75:
+          document.write("Grade: B");
+          break;
+        case 100:
+          document.write("Grade: A");
+          break;
+        default:
+            document.write("Not Satisfy the logic");
+            break;
+      }
+    </script>
+  </body>
+</html>

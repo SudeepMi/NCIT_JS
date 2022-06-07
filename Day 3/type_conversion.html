@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Conversion</title>
+</head>
+<body>
+    <script>
+        var  name = 'sudeep';
+        var age = 23;
+        
+        var result = name+age;
+
+        console.log(`${result} type : ${typeof(result)}`);
+        console.log(`${typeof(name)} and ${typeof(age)} changed 
+        implicitly to  ${typeof(result)} `)
+
+        let firstName = "jhon";
+        let lastName = "Doe";
+
+        console.log(firstName - lastName);
+
+
+        var citizenship = "8679555333";
+        console.log(`Data type of citizenship ${typeof(citizenship)}`)
+        var citizenship_no = +citizenship;
+        console.log(`Data type of citizenship ${typeof(citizenship_no)}`)
+        var citizenship_no_v2 = Number(citizenship)
+        console.log(`Data type of citizenship ${typeof(citizenship_no_v2)}`)
+        var citizenship_no_v3 = parseInt(citizenship);
+        console.log(`Data type of citizenship ${typeof(citizenship_no_v3)}`)
+
+        var citizenship_no_v4 = ""+citizenship_no_v3
+        console.log(`type of citizenship is ${typeof(citizenship_no_v4)}`);
+        var citizenship_no_v5 = String(citizenship_no_v3);
+        console.log(`type of citizenship is ${typeof(citizenship_no_v5)}`);
+
+        var fvalue = 199.0923;
+        var int = parseInt(fvalue);
+        console.log(`integer of ${fvalue} = ${int}`)
+
+        var ivalue = "111.11";
+        var float = parseFloat(ivalue)
+        console.log(`float of ${ivalue} = ${float}`)
+    </script>
+</body>
+</html>

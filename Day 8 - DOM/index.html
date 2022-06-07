@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM </title>
+    <style>
+        .test{
+            width: 200px;
+            height: 200px;
+            background-color: greenyellow;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="app"></h1>
+    <div class="test"></div>
+    <!-- <button id="btn">SHOW DIV</button> -->
+    <script>
+            let colors = ["red", "blue","green","pink","brown"];
+            function Test(){
+                let rand = parseInt(Math.random()*colors.length)
+                document.getElementsByClassName('test')[0].style.display="block";
+                document.getElementsByClassName('test')[0].style.background=colors[rand];
+            }
+            setInterval(Test,2000);
+           
+        // setTimeout(function(){
+        //     document.getElementsByClassName("test")[0].style.display = "block"
+        // },3000)
+        // setTimeout(()=>document.getElementById("app").innerHTML = "Bye world"
+        //     ,3000)
+
+        // setTimeout(()=>document.getElementById("app").style.color = "red"
+        //     ,6000)
+
+    //   function printName(){ 
+    //     setTimeout(function(){
+    //         document.getElementById("app").innerHTML = "s";
+    //         document.getElementById("app").style.color="red";
+    //     }
+    //         ,2000)
+    //     setTimeout(()=>{
+    //         document.getElementById("app").innerHTML = "su";
+    //         document.getElementById("app").style.color="green";
+
+    //     }
+    //         ,3000)
+    //     setTimeout(()=>{
+    //         document.getElementById("app").innerHTML = "sud";
+    //         document.getElementById("app").style.color="blue";
+
+    //     }
+    //         ,4000)
+    //     setTimeout(()=>document.getElementById("app").innerHTML = "sude"
+    //         ,5000)
+    //     setTimeout(()=>document.getElementById("app").innerHTML = "sudee"
+    //         ,6000)
+    //     setTimeout(()=>document.getElementById("app").innerHTML = "sudeep"
+    //         ,7000)
+        
+    //     }
+    //     printName();
+    //     setInterval(printName, 8000);
+       
+
+        
+    </script>
+    
+</body>
+</html>

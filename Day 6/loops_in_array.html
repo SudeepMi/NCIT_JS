@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops in Array</title>
+</head>
+<body>
+    <script>
+        // const names = ["sudeep","bikram","pradeep","bibek"];
+        
+        // for (let index = 0; index < names.length; index++) {
+        //     const element = names[index];
+        //     document.write(`<h2>${element}</h2>`);
+        // }
+        // const evenNo = [];
+        // for (let counter = 1; counter <= 100; counter++) {
+        //     if(counter%2===0){
+        //         evenNo.push(counter);
+        //     }
+        // }
+        // let sum = 0;
+        // for (let j = 0; j < evenNo.length; j++) {
+        //     sum += evenNo[j];
+        // }
+        // document.write(evenNo+"<br/>"+sum);
+
+        //using while loop
+        // let index = 0;
+        // while(index<evenNo.length){
+        //     if(evenNo[index]%4===0){
+        //         document.write("<br/>"+evenNo[index]);
+        //     }
+        //     index++;
+        // }
+        
+        // const assocArr = [];
+        // assocArr["name"] = "sudeep";
+
+        // console.log(assocArr)
+        // document.write(Array.isArray(evenNo))
+
+        // let counter = new Array(26).fill(0);
+
+        // let name = prompt("Enter the name:");
+        // for (let index = 0; index < name.length; index++) {
+        //     const element = name[index];
+        //     if(element==="a" || element==="A"){
+        //         counter[0] += 1;
+        //     }
+        //     if(element==="b" || element==="B"){
+        //         counter[1] += 1;
+        //     }
+        //     if(element==="c" || element==="C"){
+        //         counter[2] += 1;
+        //     }
+        //     if(element==="d" || element==="D"){
+        //         counter[3] += 1;
+        //     }
+        //     if(element==="e" || element==="E"){
+        //         counter[4] += 1;
+        //     }
+        //     if(element==="f" || element==="F"){
+        //         counter[5] += 1;
+        //     }
+        //     if(element==="g" || element==="G"){
+        //         counter[6] += 1;
+        //     }
+        // }
+        // document.write(`<h2>${name}</h2>`)
+        // document.write(`<br/>Given name contains ${counter[0]} a`)
+        // document.write(`<br/>Given name contains ${counter[1]} b`)
+        // document.write(`<br/>Given name contains ${counter[2]} c`)
+        // document.write(`<br/>Given name contains ${counter[3]} d`)
+        // document.write(`<br/>Given name contains ${counter[4]} e`)
+        // document.write(`<br/>Given name contains ${counter[5]} f`)
+        // document.write(`<br/>Given name contains ${counter[6]} g`)
+
+
+        let arrayOfLetters = ['a','b','c','d','e','f'];
+        const anotherArrayOfLetters = arrayOfLetters;
+        arrayOfLetters = [];
+        console.log(anotherArrayOfLetters);
+
+    </script>
+</body>
+</html>
