@@ -9,8 +9,48 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <style>
+      .slider{
+          width: 35%;
+          margin: auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+      }
+      .slider-btn{
+          display: flex;
+          align-items: center;
+          max-width: 350px;
+          justify-content: space-between;
+          flex-direction: row;
+      }
+      button{
+          background-color: black;
+          color: white;
+          padding: 10px;
+          border: none;
+          border-radius: 10px;
+          margin: 0 10px;
+          cursor: pointer;
+      }
+      button:hover{
+          background-color: white;
+          color: black;
+          border: 1px solid black;
+      }
+  </style>
 </head>
 <body>
-    
+    <div class="slider">
+        <div class="slider-image" id="slider_div">
+            <img src="images/1.jpg" alt="" width="350px" height="500px" id="img" class="animate__animated animate__fadeInRight">
+        </div>
+        <div class="slider-btn">
+            <button id="next_btn">Next</button>
+            <button id="prev_btn">Previous</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
