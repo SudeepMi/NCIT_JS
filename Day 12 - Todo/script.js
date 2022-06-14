@@ -11,7 +11,7 @@ MapTodo(todos);
 function addTodo(e) {
     e.preventDefault();
     const todo = todoInput.value;
-    todos.push(todo);
+    todo ? todos.push(todo) : alert('Please enter a todo');
     saveTodo();
     MapTodo(todos);
     todoInput.value = '';
@@ -38,6 +38,7 @@ function MapTodo(todos){
         newTodo.appendChild(deletIcon);  
         todoList.appendChild(newTodo);
     }
+    
 }
 
 function deleteTodo(e) {
@@ -52,7 +53,7 @@ search.addEventListener('input', (e) => {
     const filter_todos = todos.filter((todo) => {
         return todo.toLowerCase().includes(term);
     });
-   term.length > 0 ? MapTodo(filter_todos) : MapTodo(todos);
+   term.length > 0 ? 
+   MapTodo(filter_todos) : 
+   MapTodo(todos);
 })
-
-

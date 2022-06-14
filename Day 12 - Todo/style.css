@@ -36,3 +36,8 @@ body{
   .filtred{
     display: none !important;
   }
+
+  .todos{
+    max-height: 60vh;
+    overflow-y: scroll;
+  }
