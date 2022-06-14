@@ -1,0 +1,25 @@
+.product-card{
+    display: flex;
+    max-width: 100%;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #00000021;
+    margin: 11px 0px;
+}
+.product-image{
+  max-width: 30%;
+}
+.product-image img{
+  width: 100%;
+}
+.product-info{
+  max-width: 70%;
+}
+.product-info h3{
+  margin: 0;
+}
+.product-list-container{
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 11px;
+}

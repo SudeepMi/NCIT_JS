@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const person = {};
+        person.name = 'John';
+        person.age = 30;
+        console.log(person);
+
+        const cars = Object();
+        cars.name = 'BMW';
+        cars.model = 'X5';
+        console.log(cars);
+
+        // objects are mutable
+        const vehicle = cars;
+        vehicle.name = 'Audi';
+        console.log(cars, vehicle);
+
+        // accessing properties
+        // console.log(person.name);
+        // console.log(person['age']);
+
+        delete person.age;
+        // for in loop
+        for (const key in person) {
+            console.log(key);
+            console.log(person[key]);
+        }
+
+        // nested object
+        const person2 = {
+            name: 'John',
+            age: 30,
+            address: {
+                street: 'Main st',
+                city: 'Boston'
+            }
+        };
+        console.log(person2);
+
+        // nested array (array of objects)
+        const cars2 = [
+            {
+                name: 'BMW',
+                model: 'X5'
+            },
+            {
+                name: 'Audi',
+                model: 'A6'
+            }
+        ];
+
+    // object of arrays
+    const cars3 = {
+        BMW: [
+            {
+                name: 'X5',
+                model: 'X5'
+            },
+            {
+                name: 'X6',
+                model: 'X6'
+            }
+        ],
+        Audi: [
+            {
+                name: 'A6',
+                model: 'A6'
+            },
+            {
+                name: 'A7',
+                model: 'A7'
+            }
+        ]
+    };
+
+    console.log(cars3);
+
+
+
+    </script>
+</body>
+</html>
