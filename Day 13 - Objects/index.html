@@ -7,84 +7,102 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        const person = {};
-        person.name = 'John';
-        person.age = 30;
-        console.log(person);
+  
+   <script>
+    const person = {
+        name: 'John',
+        age: 30,
+        hobbies: 'sleeping'
+    }
+    console.log(person);
 
-        const cars = Object();
-        cars.name = 'BMW';
-        cars.model = 'X5';
-        console.log(cars);
+    const Cars = new Object();
+    Cars.name = 'BMW';
+    Cars.model = 'X5';
+    console.log(Cars);
 
-        // objects are mutable
-        const vehicle = cars;
-        vehicle.name = 'Audi';
-        console.log(cars, vehicle);
+    const  vehicle = Cars;
+    vehicle.name = 'Audi';
 
-        // accessing properties
-        // console.log(person.name);
-        // console.log(person['age']);
+    console.log(Cars);
+    delete Cars.model;
+    console.log(Cars);
 
-        delete person.age;
-        // for in loop
-        for (const key in person) {
-            console.log(key);
-            console.log(person[key]);
+    const sport = {
+        name:"cricket",
+        no_of_payers:11,
+        rule:"any"
+    }
+    //access
+
+    // console.log(sport.name);
+    // console.log(sport['rule']);
+
+    // for in loop
+    for(let prop in sport){
+        console.log(sport[prop]);
+    }
+
+    const person2 = {
+        name: 'John',
+        age: 30,
+        hobbies: {
+            hobby1: 'sleeping',
+            hobby2: 'cricket'
         }
+    }
+    console.log(person2.hobbies.hobby2);
 
-        // nested object
-        const person2 = {
-            name: 'John',
-            age: 30,
-            address: {
-                street: 'Main st',
-                city: 'Boston'
-            }
-        };
-        console.log(person2);
+    //  array of objects
+    const cars2 = [
+        {name: 'BMW', model: 'X5'},
+        {name: 'Audi', model: 'A8'},
+        {name: 'Mercedes', model: 'C class'}
+    ];
 
-        // nested array (array of objects)
-        const cars2 = [
-            {
-                name: 'BMW',
-                model: 'X5'
-            },
-            {
-                name: 'Audi',
-                model: 'A6'
-            }
-        ];
+    console.log(cars2);
 
-    // object of arrays
-    const cars3 = {
-        BMW: [
-            {
-                name: 'X5',
-                model: 'X5'
-            },
-            {
-                name: 'X6',
-                model: 'X6'
-            }
-        ],
-        Audi: [
-            {
-                name: 'A6',
-                model: 'A6'
-            },
-            {
-                name: 'A7',
-                model: 'A7'
-            }
-        ]
-    };
+    // objects of arrays
 
-    console.log(cars3);
+    const obj = {
+       cars:[
+            "bmw",
+            "audi",
+            "mercedes"
+       ],
+       persons:[
+            "john",
+            "jane",
+            "joe"
+       ],
+       rank:[
+            1,
+            2,
+            3
+       ],
+    }
+
+    // objects with methods
+
+    const person3 ={
+        name: 'John',
+        age: 30,
+        hobbies: ['sleeping', 'cricket'],
+        printHobbies: function(){
+            console.log(this.hobbies);
+        },
+        getName:  function(){
+            return this.name.toUpperCase();
+        }
+    }
+
+    document.write(person3.getName());
+
+    const string__ = JSON.stringify(person3);
+    localStorage.setItem('object', string__);
+    
 
 
-
-    </script>
+   </script>
 </body>
 </html>
