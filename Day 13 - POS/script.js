@@ -6,28 +6,23 @@ const productQuantity = document.querySelector('#itemQuantity');
 const productPhoto = document.querySelector('#itemPhoto');
 
 const product = {
-    id: '',
-    name: '',
-    price: '',
-    quantity: '',
-    photo: '',
+    id:'',
+    name:'',
+    price:'',
+    quantity:'',
+    photo:'',
     reset : function(){
         this.id = '';
         this.name = '';
         this.price = '';
         this.quantity = '';
         this.photo = '';
+        return this;
     }
 }
 
-function resetInputs(){
-    productName.value = '';
-    productPrice.value = '';
-    productQuantity.value = '';
-    productPhoto.value = '';
-}
+var allProducts = JSON.parse(localStorage.getItem('products')) || [];
 
-const allProducts = JSON.parse(localStorage.getItem('products')) || [];
 
 productPhoto.addEventListener('change', (e) => {
     const file = e.target.files[0];
@@ -44,31 +39,9 @@ addProductBtn.addEventListener('click', () => {
     printAllProducts();
     product.reset();
     resetInputs();
+    location.reload();
 })
 
-function createCard(product){
-    return  `<div class="product-card">
-    <div class="product-image">
-      <img
-        src=${product.photo}
-        alt=${product.name}
-      />
-    </div>
-    <div class="product-info">
-      <h3>${product.name}</h3>
-      <p>Rs. ${product.price}</p>
-      <p class="text-muted">${product.quantity} in stock</p>
-      <span>
-          <button type="button" class="btn btn-success" id=${product.id} >
-            <i class="fas fa-pen"></i>
-          </button>
-            <button type="button" class="btn btn-danger" id=${product.id}>
-                <i class="fas fa-trash"></i>
-            </button>
-      </span>
-    </div>
-  </div>`
-}
 
 function printAllProducts(){
     productList.innerHTML = '';
@@ -78,4 +51,48 @@ function printAllProducts(){
     })
 }
 
+function createCard(product){
+    return `<div class="product-card">
+    <div class="product-image">
+      <img
+        src="${product.photo}"
+        alt="${product.name}"
+      />
+    </div>
+    <div class="product-info">
+      <h3>
+        ${product.name}
+      </h3>
+      <p>${product.price}</p>
+      <p class="text-muted">${product.quantity} in stock</p>
+      <span>
+          <button type="button" class="btn btn-success" onclick="editItem(${product.id})" >
+            <i class="fas fa-pen"></i>
+          </button>
+            <button type="button" class="btn btn-danger" onclick="deleteItem(${product.id})">
+                <i class="fas fa-trash"></i>
+            </button>
+      </span>
+    </div>
+  </div>`
+
+}
+
 printAllProducts();
+
+function resetInputs(){
+    productName.value = '';
+    productPrice.value = '';
+    productQuantity.value = '';
+    productPhoto.value = '';
+}
+
+function deleteItem(id){
+    allProducts = allProducts.filter(product => product.id !== id);
+    localStorage.setItem('products', JSON.stringify(allProducts));
+    printAllProducts();
+}
+
+function editItem(id){
+    return location.href = "edit.html?id="+id;
+}
