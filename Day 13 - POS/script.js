@@ -20,7 +20,7 @@ const product = {
     }
 }
 
-const allProducts = [];
+var allProducts = JSON.parse(localStorage.getItem('products')) || [];
 
 
 productPhoto.addEventListener('change', (e) => {
@@ -35,8 +35,58 @@ addProductBtn.addEventListener('click', () => {
     product.id = allProducts.length + 1;
     allProducts.push(product);
     localStorage.setItem('products', JSON.stringify(allProducts));
-
-    // printAllProducts();
-    // product.reset();
-    // resetInputs();
+    printAllProducts();
+    product.reset();
+    resetInputs();
 })
+
+
+function printAllProducts(){
+    productList.innerHTML = '';
+    allProducts.forEach(product => {
+        const newItem = createCard(product);
+        productList.innerHTML += newItem;
+    })
+}
+
+function createCard(product){
+    return `<div class="product-card">
+    <div class="product-image">
+      <img
+        src="${product.photo}"
+        alt="${product.name}"
+      />
+    </div>
+    <div class="product-info">
+      <h3>
+        ${product.name}
+      </h3>
+      <p>${product.price}</p>
+      <p class="text-muted">${product.quantity} in stock</p>
+      <span>
+          <button type="button" class="btn btn-success" >
+            <i class="fas fa-pen"></i>
+          </button>
+            <button type="button" class="btn btn-danger" onclick="deleteItem(${product.id})">
+                <i class="fas fa-trash"></i>
+            </button>
+      </span>
+    </div>
+  </div>`
+
+}
+
+printAllProducts();
+
+function resetInputs(){
+    productName.value = '';
+    productPrice.value = '';
+    productQuantity.value = '';
+    productPhoto.value = '';
+}
+
+function deleteItem(id){
+    allProducts = allProducts.filter(product => product.id !== id);
+    localStorage.setItem('products', JSON.stringify(allProducts));
+    printAllProducts();
+}
