@@ -17,6 +17,7 @@ const product = {
         this.price = '';
         this.quantity = '';
         this.photo = '';
+        return this;
     }
 }
 
@@ -38,6 +39,7 @@ addProductBtn.addEventListener('click', () => {
     printAllProducts();
     product.reset();
     resetInputs();
+    location.reload();
 })
 
 
@@ -64,7 +66,7 @@ function createCard(product){
       <p>${product.price}</p>
       <p class="text-muted">${product.quantity} in stock</p>
       <span>
-          <button type="button" class="btn btn-success" >
+          <button type="button" class="btn btn-success" onclick="editItem(${product.id})" >
             <i class="fas fa-pen"></i>
           </button>
             <button type="button" class="btn btn-danger" onclick="deleteItem(${product.id})">
@@ -89,4 +91,8 @@ function deleteItem(id){
     allProducts = allProducts.filter(product => product.id !== id);
     localStorage.setItem('products', JSON.stringify(allProducts));
     printAllProducts();
+}
+
+function editItem(id){
+    return location.href = "edit.html?id="+id;
 }
