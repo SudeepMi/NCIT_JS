@@ -81,7 +81,7 @@ function updateInvoice(id, count){
     }
     currentInvoice.forEach(product => {
         if(product.id === id){
-            if(count < product.quantity){
+            if(count <= product.quantity){
                 product.count = count;
             }else{
                 return alert('Not enough quantity');
@@ -146,3 +146,15 @@ function createReceiptCard(product){
     <td>${product.price * product.count}</td>
     </tr>`
 }
+
+search.addEventListener('input', (e) => {
+    const searchValue = e.target.value;
+    const filteredProducts = allProducts
+                                .filter(product => product.name.toLowerCase()
+                                .includes(searchValue.toLowerCase()));
+    productList.innerHTML = '';
+    filteredProducts.forEach(product => {
+        const newItem = createCard(product);
+        productList.innerHTML += newItem;
+    })
+})
