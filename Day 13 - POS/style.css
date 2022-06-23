@@ -27,3 +27,30 @@
     max-height: 600px;
     overflow-y: auto;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.form-control-v2{
+  width: 60%;
+  height: 30px;
+  font-size: 11px;
+  padding: 5px;
+}

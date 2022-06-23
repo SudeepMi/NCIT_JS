@@ -1,9 +1,37 @@
 const productList = document.querySelector('#productList');
 const search = document.querySelector('#search');
 const tbody = document.querySelector('#tbody');
+const inumber = document.querySelector('#inumber');
+const ctotal = document.querySelector('#ctotal');
+const cdate = document.querySelector('#cdate');
+const ctime = document.querySelector('#ctime');
+const cname = document.querySelector('#cname');
+const cphone = document.querySelector('#cphone');
+const cmode = document.querySelector('#cmode');
 
 var allProducts = JSON.parse(localStorage.getItem('products')) || [];
 var currentInvoice = JSON.parse(localStorage.getItem('currentInvoice')) || [];
+var allInvoice = JSON.parse(localStorage.getItem('allInvoice')) || [];
+
+window.scrollTo(0, document.body.scrollHeight);
+
+
+// assign invoice number to current invoice
+function assignInvoiceNumber(){
+    if(allInvoice.length === 0){
+        inumber.innerHTML = 'INV-1';
+    }
+    else{
+        var lastInvoice = allInvoice[allInvoice.length - 1];
+        var lastInvoiceNumber = lastInvoice.invoiceNumber;
+        var lastInvoiceNumberSplit = lastInvoiceNumber.split('-');
+        var lastInvoiceNumberNumber = parseInt(lastInvoiceNumberSplit[1]);
+        var newInvoiceNumber = 'INV-' + (lastInvoiceNumberNumber + 1);
+        inumber.innerHTML = newInvoiceNumber;
+    }
+}
+
+assignInvoiceNumber();
 
 function printAllProducts(){
     productList.innerHTML = ''
@@ -59,12 +87,17 @@ function addToInvoice(id){
 }
 
 function printInvoice(){
+    const d = new Date();
+
     const invoice = JSON.parse(localStorage.getItem('currentInvoice')) || [];
     tbody.innerHTML = '';
     invoice.forEach(product => {
         const newItem = createInvoiceCard(product);
         tbody.innerHTML += newItem;
     })
+    ctotal.innerHTML = calculateTotal();
+    cdate.innerHTML = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    ctime.innerHTML = d.getHours() + ':' + d.getMinutes();
 }
 
 function deleteInvoiceItem(id){
@@ -110,7 +143,54 @@ function payAndPrint(){
         return acc + (product.price * product.count);
     }, 0);
 
-    const receipt = `<h3 style="text-align:center;font-size:30px">Receipt</h3>
+    // deduct from inventory
+    invoice.forEach(product => {
+        allProducts.forEach(p => {
+            if(p.id === product.id){
+                p.quantity -= product.count;
+            }
+        })
+        // save
+        localStorage.setItem('products', JSON.stringify(allProducts));
+    })
+
+    const receipt = `
+    <html>
+    <head>
+        <title>Invoice</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+    <h3 style="text-align:center;font-size:30px">Receipt</h3><hr />
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Invoice Number : <span class="text-bold">#${inumber.innerHTML}<span></h5>
+        </div>
+        <div class="col-md-6">
+            <h5>Date : ${cdate.innerHTML}</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Time: ${ctime.innerHTML}</h5>
+        </div>
+        <div class="col-md-6">
+            <h5>Total: ${total}</h5>
+        </div>
+    </div>
+    <hr />
+    <h5>Customer Details</h5>
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Name: ${String(cname.value).toUpperCase()}</h5>
+        </div>
+        <div class="col-md-4">
+            <h5>Phone: ${cphone.value}</h5>
+        </div>
+        <div class="col-md-4">
+            <h5>Payment: ${cmode.value}</h5>
+            </div>
+    </div>
     <table class="table table-bordered" style="width: 100%; font-size: 25px; text-align: center;">
     <thead>
         <tr>
@@ -129,13 +209,34 @@ function payAndPrint(){
             <td >${total}</td>
         </tr>
     </tfoot>
-    </table>`;
+    </table>
+    </body>
+    </html>`;
 
     const printWindow = window.open('','','width=800,height=600');
     printWindow.document.write(receipt);
     printWindow.print();
     printWindow.document.close();
+    // add current invoice to invoice
+    allInvoice.push({
+        invoiceNumber: inumber.innerHTML,
+        invoice: currentInvoice,
+        total: total,
+        date: cdate.innerHTML,
+        time: ctime.innerHTML,
+        customer: {
+            name: cname.value,
+            phone: cphone.value,
+        },
+        payment: cmode.value
+    });
+    localStorage.setItem('allInvoice', JSON.stringify(allInvoice));
     clearInvoice();
+
+    // reset inputs
+    cname.value = '';
+    cphone.value = '';
+    cmode.value = '';
 }
 
 function createReceiptCard(product){
@@ -158,3 +259,12 @@ search.addEventListener('input', (e) => {
         productList.innerHTML += newItem;
     })
 })
+
+//calculate total
+function calculateTotal(){
+    const invoice = JSON.parse(localStorage.getItem('currentInvoice')) || [];
+    const total = invoice.reduce((acc, product) => {
+        return acc + (product.price * product.count);
+    }, 0);
+    return total;
+}
