@@ -15,6 +15,7 @@ function printAllProducts(){
 }
 
 printAllProducts();
+printInvoice();
 
 function createCard(product){
     return `<div class="col-lg-3 col-md-6 my-2">
@@ -35,11 +36,11 @@ function createInvoiceCard(product){
     <td>${product.name}</td>
     <td>${product.price}</td>
     <td>
-        <input type="number" class="form-control w-100" value="${product.count}">
+        <input type="number" class="form-control w-100" value="${product.count}" onchange="updateInvoice('${product.id}',this.value)">
     </td>
     <td>${product.price * product.count}</td>
     <td>
-        <button type="button" class="btn btn-danger">
+        <button type="button" class="btn btn-danger" onclick="deleteInvoiceItem('${product.id}')">
             <i class="fas fa-trash"></i>
         </button>
     </td>
@@ -64,3 +65,27 @@ function printInvoice(){
         tbody.innerHTML += newItem;
     })
 }
+
+function deleteInvoiceItem(id){
+    currentInvoice = currentInvoice.filter(product => product.id !== id);
+    localStorage.setItem('currentInvoice', JSON.stringify(currentInvoice));
+    printInvoice();
+}
+
+function updateInvoice(id, count){
+    currentInvoice.forEach(product => {
+        if(product.id === id){
+            product.count = count;
+        }
+    })
+    localStorage.setItem('currentInvoice', JSON.stringify(currentInvoice));
+    printInvoice();
+}
+
+function clearInvoice(){
+    currentInvoice = [];
+    localStorage.setItem('currentInvoice', JSON.stringify(currentInvoice));
+    printInvoice();
+}
+
+
