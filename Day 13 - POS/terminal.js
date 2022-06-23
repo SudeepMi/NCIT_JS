@@ -25,6 +25,7 @@ function createCard(product){
         <div class="card-body">
             <h5 class="card-title">${product.name}</h5>
             <p class="card-text">Rs. ${product.price}</p>
+            <span class="text-small text-muted">${product.quantity} in stock</span>
             <a href="#" class="btn btn-primary" onclick="addToInvoice('${product.id}')">Add to Invoice</a>
         </div>
     </div>
@@ -73,9 +74,19 @@ function deleteInvoiceItem(id){
 }
 
 function updateInvoice(id, count){
+    if(count<0){
+        count = 0;
+        alert('Quantity cannot be negative');
+        return;
+    }
     currentInvoice.forEach(product => {
         if(product.id === id){
-            product.count = count;
+            if(count < product.quantity){
+                product.count = count;
+            }else{
+                return alert('Not enough quantity');
+            }
+
         }
     })
     localStorage.setItem('currentInvoice', JSON.stringify(currentInvoice));
@@ -119,5 +130,19 @@ function payAndPrint(){
         </tr>
     </tfoot>
     </table>`;
+
+    const printWindow = window.open('','','width=800,height=600');
+    printWindow.document.write(receipt);
+    printWindow.print();
+    printWindow.document.close();
+    clearInvoice();
 }
 
+function createReceiptCard(product){
+    return `<tr>
+    <td>${product.name}</td>
+    <td>${product.price}</td>
+    <td>${product.count}</td>
+    <td>${product.price * product.count}</td>
+    </tr>`
+}
