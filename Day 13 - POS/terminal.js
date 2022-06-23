@@ -88,4 +88,36 @@ function clearInvoice(){
     printInvoice();
 }
 
+function payAndPrint(){
+    const invoice = JSON.parse(localStorage.getItem('currentInvoice')) || [];
+    if(invoice.length == 0){
+        alert('No items in invoice');
+        return;
+    }
+
+    const total = invoice.reduce((acc, product) => {
+        return acc + (product.price * product.count);
+    }, 0);
+
+    const receipt = `<h3 style="text-align:center;font-size:30px">Receipt</h3>
+    <table class="table table-bordered" style="width: 100%; font-size: 25px; text-align: center;">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${invoice.map(product => createReceiptCard(product)).join('')}
+    </tbody>
+    <tfoot>
+        <tr style="padding: 10px;background: burlywood;font-size: 25px;" rowspan="3">
+            <td colspan="3">Total</td>
+            <td >${total}</td>
+        </tr>
+    </tfoot>
+    </table>`;
+}
 
