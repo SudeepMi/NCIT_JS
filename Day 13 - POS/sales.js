@@ -62,10 +62,10 @@ const createSaleCard = (sale) => {
         <td>${date}</td>
         <td>${payment}</td>
         <td>
-        <a href="#" class="btn btn-primary">
+        <a href="#" class="btn btn-primary" onclick="printInvoice('${invoiceNumber}')">
             <i class="fas fa-print"></i>
         </a>
-        <a href="#" class="btn btn-warning">
+        <a href="#" class="btn btn-warning" onclick="showInvoice('${invoiceNumber}')">
         <i class="fas fa-eye"></i>
     </a>
     </td>
@@ -150,3 +150,89 @@ function printTotal(){
 }
 printTotal(allSales);
 
+function createReceiptCard(product){
+    return `<tr>
+    <td>${product.name}</td>
+    <td>${product.price}</td>
+    <td>${product.count}</td>
+    <td>${product.price * product.count}</td>
+    </tr>`
+}
+
+function makeRecipt(invoiceNumber){
+    const invoice = allSales.find(sale => sale.invoiceNumber === invoiceNumber);
+    console.log(invoice)
+    const receipt = `
+    <html>
+    <head>
+        <title>Invoice</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+    <h3 style="text-align:center;font-size:30px">Receipt</h3><hr />
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Invoice Number : <span class="text-bold">#${invoice.invoiceNumber}<span></h5>
+        </div>
+        <div class="col-md-6">
+            <h5>Date : ${invoice.date}</h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Time: ${invoice.time}</h5>
+        </div>
+        <div class="col-md-6">
+            <h5>Total: ${invoice.total}</h5>
+        </div>
+    </div>
+    <hr />
+    <h5>Customer Details</h5>
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Name: ${String(invoice.customer.name).toUpperCase()}</h5>
+        </div>
+        <div class="col-md-4">
+            <h5>Phone: ${invoice.customer.phone}</h5>
+        </div>
+        <div class="col-md-4">
+            <h5>Payment: ${invoice.payment}</h5>
+            </div>
+    </div>
+    <table class="table table-bordered" style="width: 100%; font-size: 25px; text-align: center;">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        ${invoice.invoice.map(product => createReceiptCard(product)).join('')}
+    </tbody>
+    <tfoot>
+        <tr style="padding: 10px;background: burlywood;font-size: 25px;" rowspan="3">
+            <td colspan="3">Total</td>
+            <td >${invoice.total}</td>
+        </tr>
+    </tfoot>
+    </table>
+    </body>
+    </html>`;
+
+    return receipt;
+}
+
+function printInvoice(invoiceNumber){
+    const newRecipt = makeRecipt(invoiceNumber);
+    const printWindow = window.open('','','width=800,height=600');
+    printWindow.document.write(newRecipt);
+    printWindow.print();
+    printWindow.document.close();
+}
+function showInvoice(invoiceNumber){
+    const newRecipt = makeRecipt(invoiceNumber);
+    const printWindow = window.open('','','width=800,height=600');
+    printWindow.document.write(newRecipt);
+}
